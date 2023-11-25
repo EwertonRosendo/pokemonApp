@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { PhotoService } from '../services/photo.service';
 import { PokeAPIService } from '../services/poke-api.service';
@@ -23,6 +22,7 @@ interface procurarPokemon {
   providers: [Tab1Page]
 })
 export class Tab2Page {
+  
   acharPokemon: procurarPokemon = {
     name: '',
     abilities: [],
@@ -42,9 +42,7 @@ export class Tab2Page {
     private tab1Page: Tab1Page,
     private SonhoService: SonhoService
     ) {
-       {
-        this.encontrarPokemons(); //Carregar a função ao iniciar a página
-      }
+
     }  
 
   encontrarPokemons() {
@@ -58,20 +56,27 @@ export class Tab2Page {
           this.compararAbilities(this.tab1Page.acharPokemon.abilities);
     });
   }
-
+  
   compararAbilities(tab1Abilities: any[]) {
     const numeroAbilitiesTab1 = this.SonhoService.numeroDeDeus; //Habilidade Tab1
     const numeroAbilitiesTab2 = this.acharPokemon.abilities.length; //Habilidade Tab2
     
     //let tentamo:string = 'MEU POKEMON:'+numeroAbilitiesTab1+'POKEMON DAS RUAS:'+numeroAbilitiesTab2 ; 
     let tentamo:number = this.SonhoService.numeroDeDeus
+  
+    let ganhou = 0;
+    let perdeu = 0;
+    let empate = 0;
 
     if (numeroAbilitiesTab2 === numeroAbilitiesTab1) {
       this.mudarCor('yellow', 'EMPATE');
+      empate++;
     } else if (numeroAbilitiesTab2 > numeroAbilitiesTab1) {
       this.mudarCor('red', 'GANHOU');
+      ganhou++;
     } else {
       this.mudarCor('green', 'PERDEU');
+      perdeu++;
     }
   }
 

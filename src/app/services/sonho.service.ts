@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,7 @@ export class SonhoService {
   }
   
   public numeroDeDeus = 0;
-  
+
   public setAbilities(abilities: number) {
     this.numeroDeDeus = abilities;
   }
@@ -17,4 +18,5 @@ export class SonhoService {
   public getDEUS(){
     return this.numeroDeDeus;
   }
+  
 }
