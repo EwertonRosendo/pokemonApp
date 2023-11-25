@@ -85,7 +85,12 @@ export class Tab2Page {
     }
 
     this.Pokedex.setPokemons(this.SonhoService.nome, this.SonhoService.image, this.DadosService.derrotas, this.DadosService.vitorias, this.DadosService.empates)
+
+    //this.Pokedex.name_anterior = this.SonhoService.nome
+
+    
   }
+  
 
   mudarCor(color: string, mensagem: string) {
     this.corTexto = {
