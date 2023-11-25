@@ -3,6 +3,8 @@ import { PhotoService } from '../services/photo.service';
 import { PokeAPIService } from '../services/poke-api.service';
 import { Tab1Page } from '../tab1/tab1.page';
 import { SonhoService } from '../services/sonho.service';
+import { PokedexService } from '../services/pokedex.service';
+import { DadosService } from '../services/dados.service';
 
 
 interface procurarPokemon {
@@ -40,12 +42,16 @@ export class Tab2Page {
     public photoService: PhotoService,
     private pokeAPIService: PokeAPIService,
     private tab1Page: Tab1Page,
-    private SonhoService: SonhoService
+    private SonhoService: SonhoService,
+    private Pokedex : PokedexService,
+    private DadosService : DadosService
     ) {
 
     }  
 
   encontrarPokemons() {
+    
+
     this.pokeAPIService.getPokeAPIService()
         .subscribe((value: any) => {
           this.acharPokemon.name = value.name;
@@ -54,6 +60,7 @@ export class Tab2Page {
           this.acharPokemon.height = value.height;
           this.acharPokemon.weight = value.weight;
           this.compararAbilities(this.tab1Page.acharPokemon.abilities);
+          
     });
   }
   
@@ -63,21 +70,21 @@ export class Tab2Page {
     
     //let tentamo:string = 'MEU POKEMON:'+numeroAbilitiesTab1+'POKEMON DAS RUAS:'+numeroAbilitiesTab2 ; 
     let tentamo:number = this.SonhoService.numeroDeDeus
-  
-    let ganhou = 0;
-    let perdeu = 0;
-    let empate = 0;
+    
 
     if (numeroAbilitiesTab2 === numeroAbilitiesTab1) {
       this.mudarCor('yellow', 'EMPATE');
-      empate++;
+      this.DadosService.empates +=1
     } else if (numeroAbilitiesTab2 > numeroAbilitiesTab1) {
       this.mudarCor('red', 'GANHOU');
-      ganhou++;
+      this.DadosService.vitorias+=1
+      ;
     } else {
       this.mudarCor('green', 'PERDEU');
-      perdeu++;
+      this.DadosService.derrotas+=1
     }
+
+    this.Pokedex.setPokemons(this.SonhoService.nome, this.SonhoService.image, this.DadosService.derrotas, this.DadosService.vitorias, this.DadosService.empates)
   }
 
   mudarCor(color: string, mensagem: string) {

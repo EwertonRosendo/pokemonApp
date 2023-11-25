@@ -2,6 +2,7 @@ import { PokedexService } from '../services/pokedex.service';
 import { PokeAPIService } from '../services/poke-api.service';
 import { Component } from '@angular/core';
 import { SonhoService } from '../services/sonho.service';
+import { DadosService } from '../services/dados.service';
 
 
 
@@ -12,8 +13,9 @@ import { SonhoService } from '../services/sonho.service';
 })
 export class Tab3Page {
 
-  pokemonlist = [];
-
+  pokemonList = this.pokedexService.getPokemons();
+  dados = this.dadosService.dados
+  pokemonsJson = []
   verde: any = {};
 
   vermelho: any = {};
@@ -23,24 +25,17 @@ export class Tab3Page {
   constructor(
     private pokeAPIService: PokeAPIService,
     private SonhoService: SonhoService,
-    private pokedexService: PokedexService
+    private pokedexService: PokedexService,
+    private dadosService: DadosService
   ) {
     this.OnOK()
     this.OnInit()
   }
+  
 
   OnInit() {
-    let ganhou = 5;
-    let perdeu = 2;
-    let empate = 3;
-    let imagem = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/35.png';
-    this.pokemon.ganhou = ganhou;
-    this.pokemon.perdeu = perdeu;
-    this.pokemon.empate = empate;
-    for (let i = 0; i < this.pokedexService.pokemons.length; i++) {
-      this.pokemonlist.push(JSON.parse(this.pokedexService.pokemons[i]));
-    }
-    this.pokemon.img = imagem;
+    
+
   }
 
   OnOK() {

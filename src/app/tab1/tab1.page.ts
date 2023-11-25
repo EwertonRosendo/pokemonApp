@@ -61,9 +61,11 @@ export class Tab1Page {
           this.acharPokemon.abilities = value.abilities.map((ability: any) => ability.ability.name)
           this.acharPokemon.height = value.height;
           this.SonhoService.setAbilities((this.acharPokemon.abilities).length)
+          this.SonhoService.nome = this.acharPokemon.name;
+          this.SonhoService.image = this.acharPokemon.sprites.front_default;
           this.acharPokemon.weight = value.weight;
           let pokemon = {name: this.acharPokemon.name, image: this.acharPokemon.sprites.front_default}
-          this.pokedexService.setPokemons(JSON.parse(JSON.stringify(pokemon)))
+          //this.pokedexService.setPokemons(this.acharPokemon.name, this.acharPokemon.sprites.front_default)
         });
         
   } 
